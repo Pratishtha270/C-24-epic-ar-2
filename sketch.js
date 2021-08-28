@@ -8,7 +8,7 @@ var canvas;
 var player, playerBase;
 var computer, computerBase;
 var playerArcher,computerArcher;
-var arrow;
+var arrow
 
 
 function setup() {
@@ -22,8 +22,8 @@ function setup() {
  
   //Create Player Archer Object
   playerArcher = new PlayerArcher(
-    width - 340,
-    playerBase.body.position.y - 200,
+    340,
+    playerBase.body.position.y - 180,
     120,
      120
      );
@@ -48,7 +48,19 @@ function setup() {
   );
   
   //Create an arrow Object
-  
+  //computerArrow=new ComputerArrow(
+ //   width-350,
+  //  computerBase.body.position.y-180,
+  //  100,
+ //   15
+//  )
+
+  arrow=new PlayerArrow(
+    350,
+    playerBase.body.position.y-180,
+    100,
+    15
+  )
   
 }
 
@@ -63,7 +75,6 @@ function draw() {
   textSize(40);
   text("EPIC ARCHERY", width / 2, 100);
 
- 
   playerBase.display();
   player.display();
   
@@ -74,15 +85,31 @@ function draw() {
   playerArcher.display();
   computerArcher.display()
 
-
   //Display arrow();
+  //computerArrow.display();
+  arrow.display();
   
   //if Space (32) key is pressed call shoot function of playerArrow
   if(keyCode === 32){
+    arrow.shoot()
+    arrow.shoot(playerArcher.body.angle);
+  }
     //Call shoot() function and pass angle of playerArcher
 
 
-  }
+    if (move==="UP" && playerArcher.body.angle < 1.77){
+      angleValue=0.1;
+    }else{
+      angleValue=-0.1;
+    }
+  
+    if (move==="DOWN" && playerArcher.body.angle > 1.47){
+      angleValue=-0.1;
+    }else{
+      angleValue=0.1;
+    }
+
+  
 }
 
 
