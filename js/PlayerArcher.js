@@ -1,5 +1,5 @@
 class PlayerArcher {
-    constructor(x, y, width, height) {
+    constructor(x, y, width, height,angle) {
       var options = {
         isStatic: true
       };
@@ -7,6 +7,7 @@ class PlayerArcher {
       this.height = height;
       this.body = Bodies.rectangle(x, y, this.width, this.height, options);
       this.image = loadImage("./assets/playerArcher.png");
+      this.angle=angle;
       World.add(world, this.body);
       Matter.Body.setAngle(this.body,-PI/2);
     }
@@ -15,6 +16,17 @@ class PlayerArcher {
       var pos = this.body.position;
       var angle = this.body.angle;
   
+      if (keyIsDown("DOWN_ARROW") && angle < -1.7){
+        this.angle=this.angle+0.01
+        Matter.Body.setAngle(this.body,angle);
+      }
+    
+      
+      if (keyIsDown("UP_ARROW") && angle > -1.9){
+        this.angle=this.angle-0.01;
+        Matter.Body.setAngle(this.body,angle);
+      }
+
       push();
       translate(pos.x, pos.y);
       rotate(angle);
